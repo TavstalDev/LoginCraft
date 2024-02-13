@@ -53,7 +53,7 @@ public class Config {
         MinPasswordLength = builder.define("min_password_length", 4, 0, 30);
         MaxPasswordLength = builder.define("max_password_length", 30, 30, 60);
 
-        MessageInterval = builder.define("message_interval", 5, 0, 0);
+        MessageInterval = builder.define("message_interval", 5, 0, 30);
         ApplyBlindEffect = builder.define("apply_blind_effect", true);
         PreventOtherCase = builder.define("prevent_other_case", true);
         
