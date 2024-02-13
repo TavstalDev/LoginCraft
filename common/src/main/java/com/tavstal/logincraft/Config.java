@@ -46,9 +46,9 @@ public class Config {
         KickOnWrongPassword= builder.define("kick_on_wrong_password", true);
         AllowMovement = builder.define("allow_movement", false);
         Timeout = builder.define("timeout", 30, 0, 300);
-        AllowedNicknameCharacters = builder.define("allowed_nickname_characters", "", 0, 0);
+        AllowedNicknameCharacters = builder.define("allowed_nickname_characters", "", 0, 100);
         DenyTabCompleteBeforeLogin = builder.define("deny_tab_complete_before_login", true);
-        AllowedPasswordCharacters = builder.define("allowed_password_characters", "", 0, 0);
+        AllowedPasswordCharacters = builder.define("allowed_password_characters", "", 0, 100);
 
         MinPasswordLength = builder.define("min_password_length", 4, 0, 30);
         MaxPasswordLength = builder.define("max_password_length", 30, 30, 60);
@@ -58,9 +58,9 @@ public class Config {
         PreventOtherCase = builder.define("prevent_other_case", true);
         
         EnableAntiBot = builder.define("enable_antibot", true);
-        AntiBotInterval = builder.define("antibot_interval", 5, 0, 0);
-        AntiBotSensivity = builder.define("antibot_sensivity", 10, 1, 0);
-        AntiBotDuration = builder.define("antibot_duration", 10, 0, 0);
+        AntiBotInterval = builder.define("antibot_interval", 5, 1, 60);
+        AntiBotSensivity = builder.define("antibot_sensivity", 10, 1, Integer.MAX_VALUE);
+        AntiBotDuration = builder.define("antibot_duration", 10, 10, Integer.MAX_VALUE);
         builder.pop();
         builder.build();
     }
