@@ -1,7 +1,7 @@
-package com.example.examplemod.platform;
+package com.tavstal.logincraft.platform;
 
-import com.example.examplemod.Constants;
-import com.example.examplemod.platform.services.IPlatformHelper;
+import com.tavstal.logincraft.Constants;
+import com.tavstal.logincraft.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
 

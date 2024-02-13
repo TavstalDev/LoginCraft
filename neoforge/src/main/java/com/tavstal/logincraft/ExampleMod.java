@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.tavstal.logincraft;
 
 
 import net.neoforged.bus.api.IEventBus;
@@ -15,7 +15,6 @@ public class ExampleMod {
 
         // Use NeoForge to bootstrap the Common mod.
         Constants.LOG.info("Hello NeoForge world!");
-        CommonClass.init();
-
+        LoginCommon.init();
     }
 }

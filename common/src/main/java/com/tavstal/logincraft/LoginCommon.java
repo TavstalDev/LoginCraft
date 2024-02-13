@@ -1,6 +1,13 @@
-package com.example.examplemod;
+package com.tavstal.logincraft;
 
-import com.example.examplemod.platform.Services;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+
+import com.tavstal.logincraft.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
 
@@ -8,7 +15,7 @@ import net.minecraft.world.item.Items;
 // import and access the vanilla codebase, libraries used by vanilla, and optionally third party libraries that provide
 // common compatible binaries. This means common code can not directly use loader specific concepts such as Forge events
 // however it will be compatible with all supported mod loaders.
-public class CommonClass {
+public class LoginCommon {
 
     // The loader specific projects are able to import and use any code from the common project. This allows you to
     // write the majority of your code here and load it from your loader specific projects. This example has some
@@ -27,5 +34,13 @@ public class CommonClass {
 
             Constants.LOG.info("Hello to examplemod");
         }
+    }
+
+    private static void SetLogLevel(String level) {
+        // Set the logging level for the logger
+        LoggerContext loggerContext = (LoggerContext) LogManager.getContext(false);
+        LoggerConfig loggerConfig = loggerContext.getConfiguration().getLoggerConfig(Constants.LOG.getName());
+        loggerConfig.setLevel(Level.valueOf(level.toUpperCase()));
+        loggerContext.updateLoggers();
     }
 }

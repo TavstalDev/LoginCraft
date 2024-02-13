@@ -1,4 +1,4 @@
-package com.example.examplemod.platform.services;
+package com.tavstal.logincraft.platform.services;
 
 public interface IPlatformHelper {
 
