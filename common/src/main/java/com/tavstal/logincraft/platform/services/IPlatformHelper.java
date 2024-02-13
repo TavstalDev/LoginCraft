@@ -10,6 +10,20 @@ public interface IPlatformHelper {
     String getPlatformName();
 
     /**
+     * Checks if the mod is loaded by a client
+     * 
+     * @return True if the mod is loaded by the client
+     */
+    boolean isClientSide();
+
+    /**
+     * Checks if the mod is loaded by the server
+     * 
+     * @return True if the mod is loaded by the server
+     */
+    boolean isServerSide();
+
+    /**
      * Checks if a mod with the given id is loaded.
      *
      * @param modId The mod to check if it is loaded.

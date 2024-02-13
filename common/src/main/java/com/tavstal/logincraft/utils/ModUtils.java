@@ -13,6 +13,16 @@ public class ModUtils {
         return net.minecraft.network.chat.ComponentUtils.fromMessage(new LiteralMessage(text));
     }
 
+    public static void SendMessage(Entity entity, String text) {
+        var messageComponent = Literal(text);
+        entity.sendSystemMessage(messageComponent);
+    }
+
+    public static void SendMessage(Entity entity, String text, Object ... args) {
+        var messageComponent = Literal(MessageFormat.format(text, args));
+        entity.sendSystemMessage(messageComponent);
+    }
+
     public static void BroadcastMessage(Entity entity, String text) {
         var server = entity.getServer();
         if (server == null)
