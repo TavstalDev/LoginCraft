@@ -43,34 +43,34 @@ public class Translations {
 
 
     static {
-        IConfigBuilder builder = ConfigBuilders.newTomlConfig(Constants.MOD_ID, "translations", false).dontSync();
+        IConfigBuilder builder = ConfigBuilders.newTomlConfig(Constants.MOD_ID, "translations", true).dontSync();
         builder.push("Register");
-        RegisterRequest = builder.define("register_request", "&6Please register to the server with /register <password> <password>", 0, 256);
-        RegisterUsage = builder.define("register_usage", "&6Usage: /register <password> <password>", 0, 256);
-        RegisterMismatch = builder.define("register_mismatch", "&cYou must provide matching passwords.", 0, 256);
-        RegisterSuccess = builder.define("register_success", "&aYou have successfully registered to the server.", 0, 256);
-        RegisterByAdmin = builder.define("register_admin", "&aYou have been registered by an admin. Your password is: {0}", 0, 256);
-        RegisterAlready = builder.define("register_already", "&cYou have registered already.", 0, 256);
+        RegisterRequest = builder.define("register_request", "§6Please register to the server with /register <password> <password>", 0, 256);
+        RegisterUsage = builder.define("register_usage", "§6Usage: /register <password> <password>", 0, 256);
+        RegisterMismatch = builder.define("register_mismatch", "§cYou must provide matching passwords.", 0, 256);
+        RegisterSuccess = builder.define("register_success", "§aYou have successfully registered to the server.", 0, 256);
+        RegisterByAdmin = builder.define("register_admin", "§aYou have been registered by an admin. Your password is: {0}", 0, 256);
+        RegisterAlready = builder.define("register_already", "§cYou have registered already.", 0, 256);
         builder.pop();
         builder.push("Login");
-        LoginRequest = builder.define("login_request", "&6Please login to the server with /login <password>", 0, 256);
-        LoginUsage = builder.define("login_usage", "&6Usage: /login <password>", 0, 256);
-        LoginWrong = builder.define("login_wrong", "&cWrong password.", 0, 256);
-        LoginKick = builder.define("login_kick", "&cToo many wrong attempts.", 0, 256);
-        LoginAlready = builder.define("login_already", "&cYou have logged in already.", 0, 256);
-        LoginNotRegistered = builder.define("login_not_registered", "&cYou must register before logging in.", 0, 256);
-        LoginSuccess = builder.define("login_success", "&aYou have successfully logged in.", 0, 256);
+        LoginRequest = builder.define("login_request", "§6Please login to the server with /login <password>", 0, 256);
+        LoginUsage = builder.define("login_usage", "§6Usage: /login <password>", 0, 256);
+        LoginWrong = builder.define("login_wrong", "§cWrong password.", 0, 256);
+        LoginKick = builder.define("login_kick", "§cToo many wrong attempts.", 0, 256);
+        LoginAlready = builder.define("login_already", "§cYou have logged in already.", 0, 256);
+        LoginNotRegistered = builder.define("login_not_registered", "§cYou must register before logging in.", 0, 256);
+        LoginSuccess = builder.define("login_success", "§aYou have successfully logged in.", 0, 256);
         builder.pop();
         builder.push("Unregister");
-        UnregisterUsage = builder.define("unregister_usage", "&6Usage: /unregister <password>", 0, 256);
-        UnregisterMismatch= builder.define("unregister_mismatch", "&cYour provided password does not match with your current password.", 0, 256);
-        UnregisterSuccess= builder.define("unregister_success", "&aYou have successfully unregistered.", 0, 256);
+        UnregisterUsage = builder.define("unregister_usage", "§6Usage: /unregister <password>", 0, 256);
+        UnregisterMismatch= builder.define("unregister_mismatch", "§cYour provided password does not match with your current password.", 0, 256);
+        UnregisterSuccess= builder.define("unregister_success", "§aYou have successfully unregistered.", 0, 256);
         builder.pop();
         builder.push("Change Password");
-        ChangePasswordUsage = builder.define("change_password_usage", "&6Usage: /changepassword <currentPassword> <newPassword> <newPassword>", 0, 256);
-        ChangePasswordMismatch = builder.define("change_password_mismatch", "&cYou must provide matching passwords.", 0, 256);
-        ChangePasswordSuccess = builder.define("change_password_success", "&aYou have successfully changed your password.", 0, 256);
-        ChangePasswordFail = builder.define("change_password_fail", "&cYour provided password does not match with your current password.", 0, 256);
+        ChangePasswordUsage = builder.define("change_password_usage", "§6Usage: /changepassword <currentPassword> <newPassword> <newPassword>", 0, 256);
+        ChangePasswordMismatch = builder.define("change_password_mismatch", "§cYou must provide matching passwords.", 0, 256);
+        ChangePasswordSuccess = builder.define("change_password_success", "§aYou have successfully changed your password.", 0, 256);
+        ChangePasswordFail = builder.define("change_password_fail", "§cYour provided password does not match with your current password.", 0, 256);
         builder.pop();
         builder.push("Join");
         JoinNameLength = builder.define("join_name_length", "Your name must be longer than {0} char(s).", 0, 256);
@@ -81,8 +81,8 @@ public class Translations {
         builder.pop();
         builder.push("AntiBot");
         AntiBotKick = builder.define("antibot_kick", "AntiBot protection is active. Please try again later.", 0, 256);
-        AntiBotEnable = builder.define("antibot_enable", "&cAntiBot protection has been activated due the amount of connections.", 0, 256);
-        AntiBotDisable = builder.define("antibot_disable", "&aAntiBot protection has been deactivated.", 0, 256);
+        AntiBotEnable = builder.define("antibot_enable", "§cAntiBot protection has been activated due the amount of connections.", 0, 256);
+        AntiBotDisable = builder.define("antibot_disable", "§aAntiBot protection has been deactivated.", 0, 256);
         builder.pop();
         builder.build();
     }

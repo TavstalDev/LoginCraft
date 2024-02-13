@@ -3,7 +3,6 @@ package com.tavstal.logincraft;
 import com.supermartijn642.configlib.api.ConfigBuilders;
 import com.supermartijn642.configlib.api.IConfigBuilder;
 
-import java.lang.reflect.Array;
 import java.util.function.Supplier;
 
 public class Config {
@@ -36,7 +35,7 @@ public class Config {
 
 
     static {
-        IConfigBuilder builder = ConfigBuilders.newTomlConfig(Constants.MOD_ID, "config", false).dontSync();
+        IConfigBuilder builder = ConfigBuilders.newTomlConfig(Constants.MOD_ID, "config", true).dontSync();
         builder.push("Settings");
         AllowChat = builder.define("allow_chat", true);
         HideChat = builder.define("hide_chat", false);

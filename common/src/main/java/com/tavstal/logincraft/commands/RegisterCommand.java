@@ -43,7 +43,7 @@ public class RegisterCommand {
         LiteralCommandNode<CommandSourceStack> commandNode = dispatcher.register(
             Commands.literal(Name) // Create the command
             .requires(source -> source.hasPermission(PermissionLevel)) // Check permission
-            .then(arg.executes((context) -> execute(context))) // Implement the arguments
+            .then(arg.executes((context) -> executeSyntax(context))) // Implement the arguments
             .executes((context) -> { return executeSyntax(context); })); // If no argument was given then it's a syntax error
 
         // Generate Aliases
