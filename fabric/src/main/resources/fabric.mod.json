@@ -16,7 +16,7 @@
     "environment": "${mod_environment}",
     "entrypoints": {
         "main": [
-            "${group}.ExampleMod"
+            "${group}.LoginFabric"
         ]
     },
     "mixins": [
