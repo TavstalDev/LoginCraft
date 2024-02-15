@@ -13,16 +13,19 @@ public class ModUtils {
         return net.minecraft.network.chat.ComponentUtils.fromMessage(new LiteralMessage(text));
     }
 
+    @SuppressWarnings("null")
     public static void SendMessage(Entity entity, String text) {
         var messageComponent = Literal(text);
         entity.sendSystemMessage(messageComponent);
     }
 
+    @SuppressWarnings("null")
     public static void SendMessage(Entity entity, String text, Object ... args) {
         var messageComponent = Literal(MessageFormat.format(text, args));
         entity.sendSystemMessage(messageComponent);
     }
 
+    @SuppressWarnings("null")
     public static void BroadcastMessage(Entity entity, String text) {
         var server = entity.getServer();
         if (server == null)
@@ -31,7 +34,7 @@ public class ModUtils {
             return;
         }
 
-        var messageComponent = Literal(text);
+        Component messageComponent = Literal(text);
         // Send Message to the server
         server.sendSystemMessage(messageComponent);
         // Send Message to all clients
@@ -40,6 +43,7 @@ public class ModUtils {
         }
     }
 
+    @SuppressWarnings("null")
     public static void BroadcastMessage(Entity entity, String text, Object ... args) {
         var server = entity.getServer();
         if (server == null)
@@ -57,6 +61,7 @@ public class ModUtils {
         }
     }
 
+    @SuppressWarnings("null")
     public static void BroadcastMessageByWorld(Entity entity, String text, String worldKey) {
         var server = entity.getServer();
         if (server == null)
@@ -75,6 +80,7 @@ public class ModUtils {
         }
     }
 
+    @SuppressWarnings("null")
     public static void BroadcastMessageByWorld(Entity entity, String text, String worldKey, Object ... args) {
         var server = entity.getServer();
         if (server == null)
