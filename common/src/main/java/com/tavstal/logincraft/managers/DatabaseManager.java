@@ -1,32 +1,21 @@
 package com.tavstal.logincraft.managers;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
 
 import com.ibm.icu.text.MessageFormat;
 import com.tavstal.logincraft.models.Account;
 import com.tavstal.logincraft.utils.EntityUtils;
-import com.tavstal.logincraft.utils.PlayerUtils;
 import com.tavstal.logincraft.utils.WorldUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
 
 public class DatabaseManager {
     private String _host;
@@ -110,6 +99,20 @@ public class DatabaseManager {
         }
     }
 
+    public void UpdateAccount(Integer id, ServerPlayer player, String password) {
+        String insertSql = MessageFormat.format("UPDATE {0} SET Password='{2}' WHERE Id='{1}';", 
+        _accountTable, id, password);
+
+        try (Connection connection = CreateConnection();
+            PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
+
+            prepsInsert.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Account GetAccount(String username) {
         String getSql = MessageFormat.format("SELECT * FROM {0} WHERE Username='{1}';", _accountTable, username);
         try (Connection connection = CreateConnection();
@@ -130,7 +133,7 @@ public class DatabaseManager {
 
     public HashSet<Account> GetAccounts(String ip) {
         HashSet<Account> accounts = new HashSet<>();
-        String getSql = MessageFormat.format("SELECT * FROM {0} WHERE IP='{1}';", _accountTable, ip);
+        String getSql = MessageFormat.format("SELECT * FROM {0} WHERE IP='{1}' OR RegisterIP='{1}';", _accountTable, ip);
         try (Connection connection = CreateConnection();
             PreparedStatement prepStatement= connection.prepareStatement(getSql, Statement.RETURN_GENERATED_KEYS);) {
 
