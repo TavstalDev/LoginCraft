@@ -2,11 +2,20 @@ package com.tavstal.logincraft;
 
 import com.supermartijn642.configlib.api.ConfigBuilders;
 import com.supermartijn642.configlib.api.IConfigBuilder;
+import com.tavstal.logincraft.models.enums.DatabaseTypes;
 
 import java.util.function.Supplier;
 
 public class Config {
 
+    public static final Supplier<DatabaseTypes> DatabaseType;
+    public static final Supplier<String> DatabaseName;
+    public static final Supplier<String> DatabaseHost;
+    public static final Supplier<Integer> DatabasePort;
+    public static final Supplier<String> DatabaseUser;
+    public static final Supplier<String> DatabasePassword;
+
+    public static final Supplier<Boolean> EnableDebugMode;
     public static final Supplier<Boolean> AllowChat;
     public static final Supplier<Boolean> HideChat;
     //public static final Supplier<String[]> AllowedCommands;
@@ -36,6 +45,15 @@ public class Config {
 
     static {
         IConfigBuilder builder = ConfigBuilders.newTomlConfig(Constants.MOD_ID, "config", true).dontSync();
+        EnableDebugMode = builder.define("enable_debug_mode", false);
+        builder.push("Database");
+        DatabaseType = builder.define("db_type", DatabaseTypes.MYSQL);
+        DatabaseName = builder.define("db_name", "minecraft", 1, 255);
+        DatabaseHost = builder.define("db_host", "127.0.0.1", 1, 255);
+        DatabasePort = builder.define("db_port", 3306, 1, 65535);
+        DatabaseUser = builder.define("db_user", "root", 1, 255);
+        DatabasePassword = builder.define("db_password", "ascent", 1, 255);
+        builder.pop();
         builder.push("Settings");
         AllowChat = builder.define("allow_chat", true);
         HideChat = builder.define("hide_chat", false);

@@ -28,6 +28,7 @@ public class EntityUtils {
         return entity.level();
     }
 
+    @SuppressWarnings("null")
     public static ServerLevel GetServerLevel(Entity entity) {
         var server = entity.getServer();
         if (server == null)
