@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.sql.Date;
 
 import com.ibm.icu.text.MessageFormat;
+import com.tavstal.logincraft.interfaces.IDatabaseManager;
 import com.tavstal.logincraft.models.Account;
 import com.tavstal.logincraft.utils.EntityUtils;
 import com.tavstal.logincraft.utils.WorldUtils;
@@ -18,7 +19,7 @@ import com.tavstal.logincraft.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 
-public class DatabaseManager {
+public class MysqlManager implements IDatabaseManager {
     private String _host;
     private Integer _port;
     private String _database;
@@ -27,7 +28,7 @@ public class DatabaseManager {
     private Integer _timeout;
     private final String _accountTable = "lc_accounts";
 
-    public DatabaseManager(String host, Integer port, String database, String user, String password, Integer timeout) {
+    public MysqlManager(String host, Integer port, String database, String user, String password, Integer timeout) {
         _host = host;
         _port = port;
         _database = database;
@@ -37,7 +38,7 @@ public class DatabaseManager {
         CheckSchema();
     }
 
-    public DatabaseManager(String host, String database, String user, String password, Integer timeout) {
+    public MysqlManager(String host, String database, String user, String password, Integer timeout) {
         _host = host;
         _port = 3306;
         _database = database;
@@ -47,7 +48,7 @@ public class DatabaseManager {
         CheckSchema();
     }
 
-    private String GetJdbcUrl() {
+    public String GetJdbcUrl() {
         return MessageFormat.format("jdbc:mysql://{0}:{1}/{2}", _host, _port, _database);
     }
 
@@ -92,8 +93,20 @@ public class DatabaseManager {
 
         try (Connection connection = CreateConnection();
             PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
-
             prepsInsert.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void DeleteAccount(Integer id) {
+        String insertSql = MessageFormat.format("DELETE FROM {0} WHERE Id='{1}';", 
+        _accountTable, id);
+
+        try (Connection connection = CreateConnection();
+            PreparedStatement prepsInsert= connection.prepareStatement(insertSql);) {
+            prepsInsert.executeUpdate();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +120,7 @@ public class DatabaseManager {
         try (Connection connection = CreateConnection();
             PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
 
-            prepsInsert.execute();
+            prepsInsert.executeUpdate();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -121,7 +134,7 @@ public class DatabaseManager {
         try (Connection connection = CreateConnection();
             PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
 
-            prepsInsert.execute();
+            prepsInsert.executeUpdate();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -137,7 +150,7 @@ public class DatabaseManager {
         try (Connection connection = CreateConnection();
             PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
 
-            prepsInsert.execute();
+            prepsInsert.executeUpdate();
         }
         catch (Exception e) {
             e.printStackTrace();
