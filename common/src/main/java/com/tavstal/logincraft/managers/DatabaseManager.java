@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.sql.Date;
 
 import com.ibm.icu.text.MessageFormat;
 import com.tavstal.logincraft.models.Account;
@@ -102,6 +103,36 @@ public class DatabaseManager {
     public void UpdateAccount(Integer id, ServerPlayer player, String password) {
         String insertSql = MessageFormat.format("UPDATE {0} SET Password='{2}' WHERE Id='{1}';", 
         _accountTable, id, password);
+
+        try (Connection connection = CreateConnection();
+            PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
+
+            prepsInsert.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void UpdateAccount(Integer id, ServerPlayer player, Date lastLogin, Boolean isLogged) {
+        String insertSql = MessageFormat.format("UPDATE {0} SET LastLogin='{2}', IsLogged='{3}', IP='{4}' WHERE Id='{1}';", 
+        _accountTable, id, lastLogin, isLogged, player.getIpAddress());
+
+        try (Connection connection = CreateConnection();
+            PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
+
+            prepsInsert.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void UpdateAccount(Integer id, ServerPlayer player) {
+        BlockPos blockPos = EntityUtils.GetBlockPosition(player);
+        String worldName = WorldUtils.GetName(EntityUtils.GetLevel(player));
+        String insertSql = MessageFormat.format("UPDATE {0} SET X='{2}', Y='{3}', Z='{4}', World='{5}', Pitch='{6}', Yaw='{7}' WHERE Id='{1}';", 
+        _accountTable, id, blockPos.getX(), blockPos.getY(), blockPos.getZ(), worldName, player.getXRot(), player.getYRot());
 
         try (Connection connection = CreateConnection();
             PreparedStatement prepsInsert= connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
