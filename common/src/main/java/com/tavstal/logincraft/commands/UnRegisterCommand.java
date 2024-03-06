@@ -14,11 +14,11 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.tavstal.logincraft.Translations;
 import com.tavstal.logincraft.utils.ModUtils;
 
-public class RegisterCommand {
+public class UnRegisterCommand {
 
-    public static final String Name = "register";
+    public static final String Name = "unregister";
     public static final String Syntax = Translations.RegisterUsage.get();
-    public static final String[] Aliases = new String[] { "reg", "r" };
+    public static final String[] Aliases = new String[] { "unreg", "ur" };
     public static final Integer PermissionLevel = 0;
 
     // Put here because of the main stuff will be done here
@@ -35,8 +35,7 @@ public class RegisterCommand {
 
         RequiredArgumentBuilder<CommandSourceStack, String> arg = 
             Commands.argument("password", argType) // Create Password Argument
-            .then(Commands.argument("passwordAgain", argType).executes((context) -> { return execute(context); })) // Then create passwordAgain argument, then execute the command body
-            .executes((context) -> { return executeSyntax(context); }); // if passwordAgain was not provided then it's a syntax error
+            .executes((context) -> { return execute(context); });
 
         // Create the command itself
         LiteralCommandNode<CommandSourceStack> commandNode = dispatcher.register(

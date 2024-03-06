@@ -14,17 +14,17 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.tavstal.logincraft.Translations;
 import com.tavstal.logincraft.utils.ModUtils;
 
-public class RegisterCommand {
+public class ChangePasswordCommand {
 
-    public static final String Name = "register";
+    public static final String Name = "changepassword";
     public static final String Syntax = Translations.RegisterUsage.get();
-    public static final String[] Aliases = new String[] { "reg", "r" };
+    public static final String[] Aliases = new String[] { "chngpassword", "chngpass", "cpassword", "changep" };
     public static final Integer PermissionLevel = 0;
 
     // Put here because of the main stuff will be done here
     private static int execute(CommandContext<CommandSourceStack> command){
         //StringArgumentType.getString(command, "password")
-        
+
         return Command.SINGLE_SUCCESS;
     }
 
@@ -35,7 +35,12 @@ public class RegisterCommand {
 
         RequiredArgumentBuilder<CommandSourceStack, String> arg = 
             Commands.argument("password", argType) // Create Password Argument
-            .then(Commands.argument("passwordAgain", argType).executes((context) -> { return execute(context); })) // Then create passwordAgain argument, then execute the command body
+            .then(Commands.argument("newPassword", argType)
+                .then(Commands.argument("newPasswordAgain", argType)
+                    .executes((context) -> { return execute(context); })
+                )
+                .executes((context) -> { return executeSyntax(context); })
+            ) // Then create passwordAgain argument, then execute the command body
             .executes((context) -> { return executeSyntax(context); }); // if passwordAgain was not provided then it's a syntax error
 
         // Create the command itself

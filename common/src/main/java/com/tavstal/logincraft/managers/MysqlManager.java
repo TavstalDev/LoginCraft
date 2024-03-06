@@ -26,7 +26,7 @@ public class MysqlManager implements IDatabaseManager {
     private String _user;
     private String _password;
     private Integer _timeout;
-    private final String _accountTable = "lc_accounts";
+    private final String _accountTable = "logincraft_accounts";
 
     public MysqlManager(String host, Integer port, String database, String user, String password, Integer timeout) {
         _host = host;

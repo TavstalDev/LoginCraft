@@ -7,10 +7,12 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
 import com.google.common.reflect.Reflection;
+import com.tavstal.logincraft.commands.ChangePasswordCommand;
+import com.tavstal.logincraft.commands.LoginCommand;
 import com.tavstal.logincraft.commands.RegisterCommand;
+import com.tavstal.logincraft.commands.UnRegisterCommand;
 import com.tavstal.logincraft.interfaces.IDatabaseManager;
 import com.tavstal.logincraft.managers.MysqlManager;
-import com.tavstal.logincraft.platform.Services;
 import net.minecraft.server.MinecraftServer;
 
 public class LoginCommon {
@@ -30,16 +32,9 @@ public class LoginCommon {
         // Register Commands
         var dispatcher = server.getCommands().getDispatcher();
         RegisterCommand.register(dispatcher);
-
-        // It is common for all supported loaders to provide a similar feature that can not be used directly in the
-        // common code. A popular way to get around this is using Java's built-in service loader feature to create
-        // your own abstraction layer. You can learn more about this in our provided services class. In this example
-        // we have an interface in the common code and use a loader specific implementation to delegate our call to
-        // the platform specific approach.
-        if (Services.PLATFORM.isModLoaded("examplemod")) {
-
-            Constants.LOG.info("Hello to examplemod");
-        }
+        LoginCommand.register(dispatcher);
+        ChangePasswordCommand.register(dispatcher);
+        UnRegisterCommand.register(dispatcher);
 
         if (Config.EnableDebugMode.get()) {
             SetLogLevel("DEBUG");
